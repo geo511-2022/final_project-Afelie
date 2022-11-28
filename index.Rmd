@@ -51,14 +51,32 @@ knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
 
 ## Download and clean all required data
 ```{r}
-n=20
-data=data.frame(x=runif(n,-180,180),
-                y=runif(n,-60,60),
-                size = runif(n, 5, 20),
-                category = factor(
-                  sample(letters[1:5], n, replace = TRUE)
-                  ),
-                value = rnorm(n))
+EAB <- occ(query = 'Agrilus planipennis', from = 'gbif', gbifopts = list(country = 'US'))
+EABgbif <- occ2df(EAB$gbif)
+
+PRT <- occ(query = 'Kali tragus ', from = 'gbif', gbifopts = list(country = 'US'))
+PRTgbif <- occ2df(PRT$gbif)
+
+CT <- occ(query = 'Rhinella marina', from = 'gbif', gbifopts = list(country = 'US', hasCoordinate=TRUE))
+CTgbif <- occ2df(CT$gbif)
+
+SUS <- occ(query = 'Sus scrofa', from = 'gbif', gbifopts = list(country = 'US'))
+SUSgbif <- occ2df(SUS$gbif)
+
+ES <- occ(query = 'Sturnus vulgaris', from = 'gbif', gbifopts = list(country = 'US'))
+ESgbif <- occ2df(ES$gbif)
+
+SL <- occ(query = 'Lycorma delicatula', from = 'gbif', gbifopts = list(country = 'US'))
+SLgbif <- occ2df(SL$gbif)
+
+NC <- occ(query = 'Myocastor coypus', from = 'gbif', gbifopts = list(country = 'US'))
+NCgbif <- occ2df(NC$gbif)
+
+BR <- occ(query = 'Rattus norvegicus', from = 'gbif', gbifopts = list(country = 'US'))
+BRgbif <- occ2df(BR$gbif)
+
+DL <- occ(query = 'Taraxacum officinale', from = 'gbif', gbifopts = list(country = 'US'))
+DLgbif <- occ2df(DL$gbif)
 ```
 
 ```{r, results='asis'}
