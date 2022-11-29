@@ -1,6 +1,10 @@
 ---
+<<<<<<< HEAD
 title: "Mapping Out Invasive Species/data gaps/temperatures (Working title)"
-author: Adrian Elie
+=======
+title: "Mapping Out Invasive Species and Potential Gaps in Occurence Data"
+>>>>>>> 6e1cf96101c6d08242542f40bc2aca6daad58b5a
+author: Adrian Elies
 subtitle: Final Project
 ---
 
