@@ -1,5 +1,5 @@
 ---
-title: "Mapping Out Invasive Species"
+title: "Mapping Out Invasive Species/data gaps/temperatures (Working title)"
 author: Adrian Elie
 subtitle: Final Project
 ---
@@ -78,13 +78,81 @@ BRgbif <- occ2df(BR$gbif)
 DL <- occ(query = 'Taraxacum officinale', from = 'gbif', gbifopts = list(country = 'US'))
 DLgbif <- occ2df(DL$gbif)
 ```
+##Creating icons for each species data frame
+```{r}
+EABICON <- makeIcon(iconUrl = "https://www.hennepin.us/-/media/eab/eab-icon-100percent.png?h=200&iar=0&w=200&hash=C574FFCF36BD5B9224783083B8CBC992",
+         iconWidth = 40, iconHeight = 40,
+         iconAnchorX = 0, iconAnchorY = 0)
+
+PRTICON <- makeIcon(iconUrl = "https://cdn-icons-png.flaticon.com/512/1171/1171228.png",
+                    iconWidth = 30, iconHeight = 30,
+                    iconAnchorX = 0, iconAnchorY = 0)
+
+CTICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/n3WYl4eVsNG864cgGowL-sR2w4AWxDqcdvoo8Oio1BLRUI8oO_J2z2zoib6A1Ja8AnRicrSw1aRXF5sQ0qgc4t75E_qorryE2OKfVGz2FLiUp9vPBaGCueGUyb1Ji2YkSClNzzAOhrg=w40",
+                    iconAnchorX = 0, iconAnchorY = 0)
+
+SUSICON <- makeIcon(iconUrl = "https://cdn-icons-png.flaticon.com/512/185/185743.png",
+                   iconWidth = 38, iconHeight = 38,
+                   iconAnchorX = 0, iconAnchorY = 0)
+
+ESICON <- makeIcon(iconUrl = "https://openclipart.org/image/800px/265308",
+                    iconWidth = 38, iconHeight = 50,
+                    iconAnchorX = 0, iconAnchorY = 0)
+
+SLICON <- makeIcon(iconUrl = "https://www.udel.edu/content/udel/en/academics/colleges/canr/cooperative-extension/trending/spotted-lanternfly/_jcr_content/par_udel/panelforpages/par_1/columngenerator_835892945/par_1/image.img.png/1605199656669.png",
+                   iconWidth = 57, iconHeight = 30,
+                   iconAnchorX = 0, iconAnchorY = 0)
+
+NCICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/ejnrIDSHJYhWCDhjq4Yv2PLIg5vEHxKHmlam95aUEWRhvM3WKKw3SZhJG8wVI8Derkxw0WSQRhWSdfSTHNPmcnJUMje6PL8vltbTt0wkR0Gkx2EpIWUJkRYQ-shuhyH74BmWtKHzdDM=w40",
+                   iconAnchorX = 0, iconAnchorY = 0)
+
+BRICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/qA26kTtrEy6lbBxVeFVKakcYAcIQ4xx11PTPDMNmd8wh_x6uo-4jBctbyveqj-fYP4x_Fd8sxb8_Fs9MoMoVMYstbEY5vR_zfF22972DlH93Gc8z1I6XNAoAYPWOCq1M-gh8pXZ8DiA=w40",
+                   iconAnchorX = 0, iconAnchorY = 0)
+
+DLICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/faM0dlw6TKZGV3yPSL1xKQ3kNF4-CDkPmkw71wPUgVCQmcMWuc-IBjSXbL9xvgNR-bFwGuqjqbEeDs-3jI6LZQil9XIPrxikOhVb-wQ0BKcCUMSFXY_O-kslbi8WmQQ3x5m2EekcJpE=w40",
+                   iconAnchorX = 0, iconAnchorY = 0)
+```
+##Creating the interactive leaflet map
+```{r}
+popupMsg <- function(x) {
+ paste0("<b>", x$name,"</b><br>",
+       "<br>Recorded by: ", x$recordedBy,
+       "<br>Longitude: ", x$longitude,
+       "<br>Latitude: ", x$latitude,
+       "<br>Event Date: ", x$eventDate,
+       "<br>Basis of Record: ", x$basisOfRecord)
+}
+
+speciesGroupTitles = c("Emerald Ash Borer",
+                       "Prickly Russian Thistle",
+                       "Cane Toad",
+                       "Feral Swine",
+                       "European Starling",
+                       "Spotted Lanternfly",
+                       "Nutria",
+                       "Norway Rat",
+                       "Dandelion" )
+   
+speciesMap <- leaflet() %>%
+  addTiles() %>%
+  setView(lat=36,lng = -96,zoom=3.6) %>%
+  addMarkers(icon = EABICON, data = EABgbif, group = "Emerald Ash Borer", popup = popupMsg(EABgbif)) %>%
+  addMarkers(icon = PRTICON, data = PRTgbif, group = "Prickly Russian Thistle", popup = popupMsg(PRTgbif)) %>%
+  addMarkers(icon = CTICON, data = CTgbif, group = "Cane Toad", popup = popupMsg(CTgbif)) %>%
+  addMarkers(icon = SUSICON, data = SUSgbif, group = "Feral Swine", popup = popupMsg(SUSgbif)) %>%
+  addMarkers(icon = ESICON, data = ESgbif, group = "European Starling", popup = popupMsg(ESgbif)) %>%
+  addMarkers(icon = SLICON, data = SLgbif, group = "Spotted Lanternfly", popup = popupMsg(SLgbif)) %>%
+  addMarkers(icon = NCICON, data = NCgbif, group = "Nutria", popup = popupMsg(NCgbif)) %>%
+  addMarkers(icon = BRICON, data = BRgbif, group = "Norway Rat", popup = popupMsg(BRgbif)) %>%
+  addMarkers(icon = DLICON, data = DLgbif, group = "Dandelion", popup = popupMsg(DLgbif)) %>%
+  
+  addLayersControl(overlayGroups = speciesGroupTitles,
+    options = layersControlOptions(collapsed = TRUE))
+```
 
 ```{r, results='asis'}
-data %>% 
-  slice(1:10) %>% #show only 1:n rows
-  kable(digits=2,align="c")%>% #make table and round to two digits
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
+speciesMap
+speciesMap %>% hideGroup(speciesGroupTitles)
 ```
 
 Add any additional processing steps here.
