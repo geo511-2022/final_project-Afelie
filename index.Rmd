@@ -47,6 +47,7 @@ library(tidyverse)
 library(spocc)
 library(leaflet)
 library(kableExtra)
+library(raster)
 knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
 ```
 
