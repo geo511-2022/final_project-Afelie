@@ -113,9 +113,7 @@ BRICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/qA26kTtrEy6lbBxV
 
 DLICON <- makeIcon(iconUrl = "https://lh3.googleusercontent.com/faM0dlw6TKZGV3yPSL1xKQ3kNF4-CDkPmkw71wPUgVCQmcMWuc-IBjSXbL9xvgNR-bFwGuqjqbEeDs-3jI6LZQil9XIPrxikOhVb-wQ0BKcCUMSFXY_O-kslbi8WmQQ3x5m2EekcJpE=w40",
                    iconAnchorX = 0, iconAnchorY = 0)
-```
-##Creating the interactive leaflet map
-```{r}
+
 popupMsg <- function(x) {
  paste0("<b>", x$name,"</b><br>",
        "<br>Recorded by: ", x$recordedBy,
