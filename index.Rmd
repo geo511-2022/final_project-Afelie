@@ -44,6 +44,7 @@ Load any required packages in a code chunk (you may need to install some package
 
 ```{r, message=F, warning=F}
 library(tidyverse)
+library(spocc)
 library(leaflet)
 library(kableExtra)
 knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
