@@ -79,7 +79,8 @@ DL <- occ(query = 'Taraxacum officinale', from = 'gbif', gbifopts = list(country
 DLgbif <- occ2df(DL$gbif)
 ```
 ##Creating icons for each species data frame
-```{r}
+```{r}s
+
 EABICON <- makeIcon(iconUrl = "https://www.hennepin.us/-/media/eab/eab-icon-100percent.png?h=200&iar=0&w=200&hash=C574FFCF36BD5B9224783083B8CBC992",
          iconWidth = 40, iconHeight = 40,
          iconAnchorX = 0, iconAnchorY = 0)
