@@ -177,9 +177,7 @@ m  # a map with the default OSM tile layer
 
 
 ```{r}
-data %>% 
-  ggplot(aes(x=x,y=y,col=category))+
-  geom_point()
+
 ```
 
 # Conclusions
