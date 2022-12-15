@@ -6,39 +6,19 @@ subtitle: Final Project
 
 # Introduction
 
-[~ 200 words]
+  The United States is host to numerous invasive pests and vegetation that have been introduced throughout the past two centuries. The dispersal and present locations of these various species are always a subject of concern to various private and public stakeholders and scientific agencies. Through the use of citizen science databases which have seen an uptake of frequency in recent uses, it may be possible to create a broader and more accurate mapping of various pest species.
+  Utilizing R’s ability to create various maps with the leaflet package, we can more easily plot the areas occupied by an invasive species. We can further build on this data to compare the range of multiple invasive species to one another. In addition, to visualizing how topographic features of the United States may impede or allow the spread of these species in modern times. Additionally, we could possibly find and analyze blind spots in the data collected via citizen science.
+  This project aims to create a detailed interactive map through leaflet and R, combining topographic map data and interactive species occurrences collected by citizen science for nine varied invasive species that should have a spread presence in all of the United States. In doing so, creating a useful interactive and updating map showcasing the modern dispersal of the invasive species according to citizen science and how topographic features may shape this.
 
-Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
 
 # Materials and methods
 
-[~ 200 words]
+  Through the R package spocc I collected species occurrence data for nine different invasive species in the United States. The data was specifically pulled from the global biodiversity information facility (gbif) database containing data specifically from the year 2022. 
+  To specifically go alongside the species, for more clearer iconography in the map I found and edited various icon representing each invasive species to create a clearer and more accessible map setup.  Once the icons were finished, I uploaded them in a public google photos URL to ensure these icons would function on any PC this code is run on. 
+  In addition, I also pulled a topographical ArcGIS map from the United States Geological Survey. In order to see how geographical features such as elevation and mountainous ranges may impede invasive species currently. 
+  Once the species data objects, map, and icons had been completed I began attaching the various species objects to their respective icons. Following this I established a simple function to allow for specific key bits of information to be displayed for every individual icon point such as when the data was record and by who for example. 
+  Once that had been completed all data points, functions, and icons were loaded into a leaflet object to be called upon. 
 
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
-
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
-
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
-
-You can do bullets like this:
-
-* The first most important thing
-* The second most important thing
-* The third most important thing
-
-You can do numbers like this:
-
-1. The first most important thing
-2. The second most important thing
-3. The third most important thing
-
-See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the amazing things you can do.
-
-
-Here's my first code chunk.
-```{r}
-1+2
-```
 
 Load any required packages in a code chunk (you may need to install some packages):
 
@@ -135,6 +115,9 @@ speciesGroupTitles = c("Emerald Ash Borer",
                        "Norway Rat",
                        "Dandelion" )
    
+topo = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/WMTS/tile/1.0.0/USGSTopo/default/default028mm/{z}/{y}/{x}.png"
+relief = "https://tile.opentopomap.org/{z}/{x}/{y}.png"
+
 speciesMap <- leaflet() %>%
   addTiles() %>%
   setView(lat=36,lng = -96,zoom=3.6) %>%
@@ -153,35 +136,35 @@ speciesMap <- leaflet() %>%
 ```
 
 ```{r, results='asis'}
-speciesMap
 speciesMap %>% hideGroup(speciesGroupTitles)
 ```
 
-Add any additional processing steps here.
-
 # Results
 
-[~200 words]
-
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
-
-Show tables, plots, etc. and describe them.
-
-```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-
-```
-
-
-```{r}
-
-```
+  The interactive map above showcases all the data collected and configured together. Through toggling and selecting the various species in addition to the topographic maps, one can analyze how citizen science has recorded the present-day dispersal of invasive species and how topographic features have potentially shaped their dispersion.  
+  The map showcases the appearance of a noticeable gap in the data regarding the state of Alaska, as no species occurrence appears there. Even though several species, such as the Norway rat, are confirmed to have a presence in the state. Analysis of the individual data points to locate the source of the gap found that there may be an issue with filtering just the United States areas for species occurrence due to improper id code for that state. However, no such problems are found with data collected from Hawaii.
+  Simultaneously loading all species and their icons were somewhat taxing on several  computers during testing; however, it should still function after a few moments of loading time. Each invasive species should have 500 occurrence data points loaded onto the map. Adding additional data points may be possible by modifying the code limits, but it would likely result in a far slower and unresponsive interactive map. 
 
 # Conclusions
 
-[~200 words]
+  From the data, we can infer how citizen science data from gbif has recorded the occurrence data for these nine species and how topographic mapping has potentially shaped the dispersion and occupied niches for each species.
+  Aerial species such as the  Agrilus planipennis (emerald ash borer) and Sturnus vulgaris (European starling) seemingly have no difficulty bypassing topographic features such as the Appalachian and Adirondack mountains. However, neither have a noticeable presence in the mountains, possibly due to various factors such as niche availability and weather. Although in contrast, the Lycorma delicatula (spotted lanternfly) is primarily sequestered in the region between Washington D.C and New York City, with the Appalachians and changes in elevation appearing to act as a barrier.
+  The Alien plant species of the Salsola tragus (Russian thistle) and the Taraxacum officinale (Dandelion)are found to have widely dispersed. However, the map shows they have inclinations towards differing regions, with the dandelions favoring lower, more even terrain and the Russian thistle more dominant in the western mountainous areas creating a slight overlap.
+  Grounded invasive species such as the Sus scrofa(feral hog), Rattus norvegicus(Norway Rat), Myocastor coypus(Nutria), and the Rhinella marina(Cane Toad) were also notable shaped in dispersal by topographic features and heights. The Rocky Mountains are mainly barren of animal invasive occurrences aside from several data points near large cities such as Salt Lake City.
+  From this data collected, topographic features are shown to continue to play a role as a barrier to dispersal for certain invasive species. However, this map relies on the assumption that citizen science data is not centric on data recordings near places with high populations, such as cities and towns. Adding invasive species occurrence and dispersal prediction data from other data sources aside from gbif should be the next step in determining this data's viability.
 
-Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.
 
 # References
 
-All sources are cited in a consistent manner
+References 
+
+Attributions
+
+https://openclipart.org/detail/265308/european-starling-silhouette,
+https://thenounproject.com/icon/cane-toad-1048680/,
+https://thenounproject.com/icon/dandelion-1772332/,
+https://thenounproject.com/icon/muskrat-3386204/,
+https://thenounproject.com/icon/norway-rat-5029906/,
+https://www.flaticon.com/freeicon/boar_185743?term=wild%20boar&page=1&position=26&page=1&position=26&related_id=185743&origin=search,
+https://www.flaticon.com/free-icons/cactus" title="cactus icons Cactus icons created by Freepik – Flaticon,
+https://www.udel.edu/academics/colleges/canr/cooperative-extension/trending/spotted-lanternfly/,
