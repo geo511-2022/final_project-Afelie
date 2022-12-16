@@ -159,7 +159,7 @@ speciesMap %>% hideGroup(speciesGroupTitles)
 References 
 
 Attributions
-
+ 
 https://openclipart.org/detail/265308/european-starling-silhouette
 https://thenounproject.com/icon/cane-toad-1048680/
 https://thenounproject.com/icon/dandelion-1772332/
