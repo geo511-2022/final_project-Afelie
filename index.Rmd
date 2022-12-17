@@ -130,8 +130,10 @@ speciesMap <- leaflet() %>%
   addMarkers(icon = NCICON, data = NCgbif, group = "Nutria", popup = popupMsg(NCgbif)) %>%
   addMarkers(icon = BRICON, data = BRgbif, group = "Norway Rat", popup = popupMsg(BRgbif)) %>%
   addMarkers(icon = DLICON, data = DLgbif, group = "Dandelion", popup = popupMsg(DLgbif)) %>%
-  
-  addLayersControl(overlayGroups = speciesGroupTitles,
+ addLayersControl(baseGroups = c("Shaded Relief", "National Map Topo"),
+                   overlayGroups = speciesGroupTitles,
+                   options = layersControlOptions(collapsed = TRUE))
+
     options = layersControlOptions(collapsed = TRUE))
 ```
 
