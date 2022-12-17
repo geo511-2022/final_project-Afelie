@@ -6,21 +6,19 @@ subtitle: Final Project
 
 # Introduction
 
-  The United States is host to numerous invasive pests and vegetation that have been introduced throughout the past two centuries. The dispersal and present locations of these various species are always a subject of concern to various private and public stakeholders and scientific agencies. Through the use of citizen science databases which have seen an uptake of frequency in recent uses, it may be possible to create a broader and more accurate mapping of various pest species.
-  Utilizing R’s ability to create various maps with the leaflet package, we can more easily plot the areas occupied by an invasive species. We can further build on this data to compare the range of multiple invasive species to one another. In addition, to visualizing how topographic features of the United States may impede or allow the spread of these species in modern times. Additionally, we could possibly find and analyze blind spots in the data collected via citizen science.
-  This project aims to create a detailed interactive map through leaflet and R, combining topographic map data and interactive species occurrences collected by citizen science for nine varied invasive species that should have a spread presence in all of the United States. In doing so, creating a useful interactive and updating map showcasing the modern dispersal of the invasive species according to citizen science and how topographic features may shape this.
+    The United States is host to numerous invasive pests and vegetation that have been introduced throughout the past two centuries. The dispersal and present locations of these various species are always a subject of concern to various private and public stakeholders and scientific agencies. Through the use of citizen science databases which have seen an uptake of frequency in recent uses, it may be possible to create a broader and more accurate mapping of various pest species.
+    Utilizing R’s ability to create various maps with the leaflet package, we can more easily plot the areas occupied by an invasive species. We can further build on this data to compare the range of multiple invasive species to one another. In addition, to visualizing how topographic features of the United States may impede or allow the spread of these species in modern times. Additionally, we could possibly find and analyze blind spots in the data collected via citizen science.
+    This project aims to create a detailed interactive map through leaflet and R, combining topographic map data and interactive species occurrences collected by citizen science for nine varied invasive species that should have a spread presence in all of the United States. In doing so, creating a useful interactive and updating map showcasing the modern dispersal of the invasive species according to citizen science and how topographic features may shape this.
 
 
 # Materials and methods
 
-  Through the R package spocc I collected species occurrence data for nine different invasive species in the United States. The data was specifically pulled from the global biodiversity information facility (gbif) database containing data specifically from the year 2022. 
-  To specifically go alongside the species, for more clearer iconography in the map I found and edited various icon representing each invasive species to create a clearer and more accessible map setup.  Once the icons were finished, I uploaded them in a public google photos URL to ensure these icons would function on any PC this code is run on. 
-  In addition, I also pulled a topographical ArcGIS map from the United States Geological Survey. In order to see how geographical features such as elevation and mountainous ranges may impede invasive species currently. 
-  Once the species data objects, map, and icons had been completed I began attaching the various species objects to their respective icons. Following this I established a simple function to allow for specific key bits of information to be displayed for every individual icon point such as when the data was record and by who for example. 
-  Once that had been completed all data points, functions, and icons were loaded into a leaflet object to be called upon. 
+    Through the R package spocc I collected species occurrence data for nine different invasive species in the United States. The data was specifically pulled from the global biodiversity information facility (gbif) database containing data specifically from the year 2022. 
+    To specifically go alongside the species, for more clearer iconography in the map I found and edited various icon representing each invasive species to create a clearer and more accessible map setup.  Once the icons were finished, I uploaded them in a public google photos URL to ensure these icons would function on any PC this code is run on. 
+    In addition, I also pulled a topographical ArcGIS map from the United States Geological Survey. In order to see how geographical features such as elevation and mountainous ranges may impede invasive species currently. 
+    Once the species data objects, map, and icons had been completed I began attaching the various species objects to their respective icons. Following this I established a simple function to allow for specific key bits of information to be displayed for every individual icon point such as when the data was record and by who for example. 
+    Once that had been completed all data points, functions, and icons were loaded into a leaflet object to be called upon. 
 
-
-Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
 library(tidyverse)
@@ -134,7 +132,6 @@ speciesMap <- leaflet() %>%
                    overlayGroups = speciesGroupTitles,
                    options = layersControlOptions(collapsed = TRUE))
 
-    options = layersControlOptions(collapsed = TRUE))
 ```
 
 ```{r, results='asis'}
